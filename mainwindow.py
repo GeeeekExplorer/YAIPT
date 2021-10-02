@@ -1,6 +1,6 @@
 import os
 import functools
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT
 import matplotlib
@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from skimage import io, color, img_as_float, img_as_ubyte
 
 from ui_mainwindow import Ui_MainWindow
-from ta_algorithm import *
+from algorithm import *
 
 matplotlib.use('qt5agg')
 
@@ -43,6 +43,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionButterworth.triggered.connect(self.handleButterworth)
         self.ui.actionCanny.triggered.connect(self.handleCanny)
         self.ui.actionMorphology.triggered.connect(self.handleMorphology)
+        self.ui.actionHelp.triggered.connect(self.handleHelp)
 
     def draw(idx):
         assert idx == 1 or idx == 2
@@ -117,3 +118,6 @@ class MainWindow(QtWidgets.QMainWindow):
     @draw(2)
     def handleMorphology(self):
         self.img2 = morphology(self.all2gray(self.img1))
+
+    def handleHelp(self):
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl("https://github.com/GeeeekExplorer/YAIPT"))
