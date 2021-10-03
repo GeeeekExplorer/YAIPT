@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from skimage import io, color, img_as_float, img_as_ubyte
 
 from ui_mainwindow import Ui_MainWindow
-from algorithm import *
+from ta_algorithm import *
 
 matplotlib.use('qt5agg')
 
@@ -67,9 +67,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return decorator
 
     def all2gray(self, img):
-        if img.ndim == 3:
-            img = color.rgb2gray(img)
-        return img
+        return color.rgb2gray(img) if img.ndim == 3 else img
 
     @draw(1)
     def handleOpen(self):
@@ -84,8 +82,8 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.img2 is None:
             return
         path = QtWidgets.QFileDialog.getSaveFileName(self, filter='Image Files(*.bmp *.jpg *.png *.tif)')[0]
-        if os.path.exists(path):
-            io.imsave(path, self.img2)
+        if os.path.exists(os.path.dirname(path)):
+            io.imsave(path, img_as_ubyte(self.img2))
 
     @draw(2)
     def handlePlane(self):
