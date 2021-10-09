@@ -1,14 +1,14 @@
 import os
 import functools
 from PyQt5 import QtCore, QtGui, QtWidgets
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
-from matplotlib.backends.backend_qt5 import NavigationToolbar2QT
 import matplotlib
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt5 import NavigationToolbar2QT
 from skimage import io, color, img_as_float, img_as_ubyte
 
 from ui_mainwindow import Ui_MainWindow
-from ta_algorithm import *
+from algorithm import *
 
 matplotlib.use('qt5agg')
 
